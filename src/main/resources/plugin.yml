@@ -1,0 +1,6 @@
+name: FilterParty
+version: '${version}'
+main: me.glaremasters.filterparty.FilterParty
+api-version: 1.17
+authors: [ Glare ]
+description: Chat filter of the year
