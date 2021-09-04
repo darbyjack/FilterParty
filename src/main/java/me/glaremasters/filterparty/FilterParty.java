@@ -19,7 +19,11 @@ public final class FilterParty extends JavaPlugin implements Listener {
         saveDefaultConfig();
 
         for (final String pattern : getConfig().getStringList("patterns")) {
-            patterns.add(Pattern.compile(pattern));
+            try {
+                patterns.add(Pattern.compile(pattern));
+            } catch (Exception ex) {
+                getLogger().warning("Could not load the following invalid regex: " + pattern);
+            }
         }
 
         getServer().getPluginManager().registerEvents(this, this);
@@ -34,6 +38,7 @@ public final class FilterParty extends JavaPlugin implements Listener {
             final Matcher matcher = pattern.matcher(event.getMessage());
             if (matcher.find()) {
                 event.getRecipients().clear();
+                break;
             }
         }
     }
